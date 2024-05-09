@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Pessoas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="../static/css/style.css">
+</head>
+
+<body>
+    <form action="{% url 'cadastrar_pessoa' %}" method="POST"> {% csrf_token %}
+        <div class="input-container">
+            <label> Nome: </label>
+            <input class="input-group" type="text" name="nome" id="nome" placeholder="Insira o seu nome">
+        
+            <label> Idade: </label>
+            <input class="input-group" type="text" name="idade" id="idade" placeholder="Insira a sua idade">
+        
+            <div class="message">
+                {{menssagem}}
+            </div>
+
+            <button id="botao_cadastrar" type="submit">Cadastrar</button>
+        </div>
+    </form>
+
+    
+    <table id="style_table">
+
+        {% if pessoas %}
+        <tr>
+            <th>NOME</th>
+            <th>IDADE</th>
+        </tr>
+
+        
+
+        {% for pessoa in pessoas %}
+        <tr>
+            <td>{{pessoa.nome}}</td>
+            <td>{{pessoa.idade}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    
+
+    {% else %}
+    <h3 style="text-align: center; padding: 50px 15px;">Não há pessoas cadastradas!</h3>
+    {% endif %}
+
+</body>
+</html>
